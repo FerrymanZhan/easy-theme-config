@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EasyThemeConfig</title>
+    <style>
+        :root {
+            --proj-background: #fff;
+            --proj-text-color: #000;
+        }
+        html, body {
+            padding: 0;
+            margin: 0;
+        }
+        .page {
+            background-color:var(--proj-background);
+            color: var(--proj-text-color);
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-content: center;
+            justify-content: center;
+            text-align: center;
+        }
+        button {
+            width: 100px;
+            height: 50px;
+        }
+        .theme-list-wrap {
+            margin-bottom: 80px;
+        }
+        .theme-item {
+            width: 80px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            display: inline-block;
+            margin: 0 10px;
+            background-color: #bfa;
+        }
+    </style>
+    <script type="module">
+        import EasyThemeConfig from "../src/easy-theme-config.js";
+        import themeConfig from "./theme-config.js";
+        var ETC
+        window.onload = () => {
+            const cacheThemeIndex = localStorage.getItem("themeIndex") || 0
+            ETC = new EasyThemeConfig(themeConfig, cacheThemeIndex)
+            window.ETC = ETC
+            document.getElementById("theme-btn").addEventListener("click", ()=> {
+                console.log("Button clicked ===> change theme")
+                let themeIndex = ETC.getCurrentThemeIndex()
+                const themeConfigLen = ETC.getOptions().length
+                if (themeIndex >= themeConfigLen - 1) {
+                    themeIndex = -1
+                }
+                themeIndex++
+                ETC.setCurrentThemeByIndex(themeIndex)
+                localStorage.setItem("themeIndex", themeIndex)
+            })
+        }
+    </script>
+    <script type="application/javascript">
+        const changeTheme = (index) => {
+            window.ETC.setCurrentThemeByIndex(index)
+        }
+    </script>
+</head>
+<body>
+<div class="page">
+    <div class="theme-list-wrap">
+        <span class="theme-item" onclick="changeTheme(0)">default</span>
+        <span class="theme-item" onclick="changeTheme(1)">dark</span>
+        <span class="theme-item" onclick="changeTheme(2)">pink</span>
+        <span class="theme-item" onclick="changeTheme(3)">blue</span>
+        <span class="theme-item" onclick="changeTheme(4)">green</span>
+    </div>
+    <div>
+        <button id="theme-btn">change theme</button>
+    </div>
+    <div>
+        <h1>I AM TEXT</h1>
+    </div>
+</div>
+</body>
+</html>

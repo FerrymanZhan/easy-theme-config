@@ -1,0 +1,15 @@
+{
+  "name": "easy-theme-config",
+  "version": "0.0.2",
+  "description": "easy theme config by javascript",
+  "main": "src/easy-theme-config.js",
+  "directories": {
+    "test": "demo"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["theme", "theme-config", "easy-theme-config", "hymanzhan"],
+  "author": "Hyman Zhan",
+  "license": "MIT"
+}
